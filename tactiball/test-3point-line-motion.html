@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>三分線移動動畫</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            position: relative;
+            width: 90%;
+            max-width: 800px;
+            height: auto;
+            background-color: white;
+            border: 2px solid #ccc;
+            margin-bottom: 20px;
+        }
+        .court-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            pointer-events: none;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        .dot {
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            background-color: red;
+            border-radius: 50%;
+            z-index: 1000;
+            transform: translate(-50%, -50%);
+            animation: moveAlongPath 5s linear infinite;
+            animation-play-state: paused;
+        }
+        .position-display {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .position-value {
+            font-weight: bold;
+        }
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .control-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            transition: background-color 0.3s;
+        }
+        .control-button:hover {
+            background-color: #45a049;
+        }
+        .control-button.stop {
+            background-color: #f44336;
+        }
+        .control-button.stop:hover {
+            background-color: #da190b;
+        }
+        .control-button.reset {
+            background-color: #2196F3;
+        }
+        .control-button.reset:hover {
+            background-color: #0b7dda;
+        }
+        @keyframes moveAlongPath {
+            0% {
+                left: 16%;
+                top: 50%;
+            }
+            25% {
+                left: 24.5%;
+                top: 37.6%;
+            }
+            50% {
+                left: 49.3%;
+                top: 26.5%;
+            }
+            75% {
+                left: 77.1%;
+                top: 37.9%;
+            }
+            100% {
+                left: 84%;
+                top: 51.9%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="container">
+        <img src="images/NBA-Court-HalfCourt-Wood.svg" alt="籃球場" class="court-image">
+        <div class="dot" id="redDot"></div>
+    </div>
+    
+    <div class="position-display">
+        目前位置： X：<span id="xPosition" class="position-value">0</span>%, 
+        Y：<span id="yPosition" class="position-value">0</span>%
+    </div>
+
+    <div class="controls">
+        <button class="control-button" id="playButton">播放</button>
+        <button class="control-button stop" id="stopButton">停止</button>
+        <button class="control-button reset" id="resetButton">重置</button>
+    </div>
+
+    <script>
+        const redDot = document.getElementById('redDot');
+        const xPosition = document.getElementById('xPosition');
+        const yPosition = document.getElementById('yPosition');
+        const playButton = document.getElementById('playButton');
+        const stopButton = document.getElementById('stopButton');
+        const resetButton = document.getElementById('resetButton');
+
+        // 定義路徑點
+        const pathPoints = [
+            { x: 15.8, y: 50 },
+            { x: 24.5, y: 37.6 },
+            { x: 49.3, y: 26.5 },
+            { x: 77.1, y: 37.9 },
+            { x: 85.6, y: 51.9 }
+        ];
+
+        function updatePosition() {
+            const computedStyle = window.getComputedStyle(redDot);
+            const left = parseFloat(computedStyle.getPropertyValue('left'));
+            const top = parseFloat(computedStyle.getPropertyValue('top'));
+            
+            // Calculate percentage values based on container dimensions
+            const container = document.getElementById('container');
+            const containerWidth = container.offsetWidth;
+            const containerHeight = container.offsetHeight;
+            
+            const xPercent = (left / containerWidth) * 100;
+            const yPercent = (top / containerHeight) * 100;
+            
+            xPosition.textContent = Math.round(xPercent);
+            yPosition.textContent = Math.round(yPercent);
+            
+            requestAnimationFrame(updatePosition);
+        }
+
+        // 開始追蹤位置
+        requestAnimationFrame(updatePosition);
+
+        // 播放按鈕
+        playButton.addEventListener('click', () => {
+            redDot.style.animationPlayState = 'running';
+        });
+
+        // 停止按鈕
+        stopButton.addEventListener('click', () => {
+            redDot.style.animationPlayState = 'paused';
+        });
+
+        // 重置按鈕
+        resetButton.addEventListener('click', () => {
+            redDot.style.animation = 'none';
+            redDot.offsetHeight; // 觸發重繪
+            redDot.style.animation = 'moveAlongPath 5s linear infinite';
+            redDot.style.animationPlayState = 'paused';
+        });
+    </script>
+</body>
+</html> 

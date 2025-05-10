@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TactiBall - 籃球戰術學習平台</title>
+    <meta name="description" content="TactiBall 是一個專注於籃球戰術學習的平台，提供基礎戰術、NBA 球隊戰術分析和互動式學習體驗。">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- AOS Animation Library -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <a href="#" class="logo">TactiBall</a>
+                <ul class="nav-links">
+                    <li><a href="#features">特色</a></li>
+                    <li><a href="#testimonials">用戶評價</a></li>
+                    <li><a href="#cta">立即體驗</a></li>
+                    <li><a href="#footer">聯絡我們</a></li>
+                </ul>
+                <div class="burger">
+                    <div class="line1"></div>
+                    <div class="line2"></div>
+                    <div class="line3"></div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" id="hero">
+            <div class="container">
+                <div class="hero-content animate-fade-in">
+                    <h1>掌握籃球戰術<br>提升你的比賽智慧</h1>
+                    <p>TactiBall 提供專業的籃球戰術分析和學習平台，幫助你理解比賽中的每一個細節，從基礎到進階，成為場上的戰術大師。</p>
+                    <a href="#cta" class="btn btn-primary">開始學習</a>
+                </div>
+                <div class="hero-animation animate-fade-in delay-200">
+                    <div class="court-container">
+                        <!-- 使用重新製作的半場籃球場SVG，只保留木板紋理和必要元素 -->
+                        <object data="images/NBA-Court-HalfCourt-Wood.svg" type="image/svg+xml" class="court-svg">
+                            您的瀏覽器不支援SVG
+                        </object>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features" id="features">
+            <div class="container">
+                <h2 data-aos="fade-up">我們的特色</h2>
+                <div class="features-grid">
+                    <div class="feature-card" data-aos="fade-up">
+                        <div class="feature-icon">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <h3>基礎戰術教學</h3>
+                        <p>從基本的傳切配合到複雜的擋拆戰術，我們提供清晰易懂的教學內容，幫助初學者快速掌握籃球戰術的基本概念。</p>
+                        <div class="feature-image">
+                            <img src="images/basic-tactics.jpg" alt="基礎戰術教學" class="tactic-img">
+                        </div>
+                    </div>
+                    <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="feature-icon">
+                            <i class="fas fa-basketball-ball"></i>
+                        </div>
+                        <h3>NBA 球隊戰術</h3>
+                        <p>深入分析 NBA 各支球隊的經典戰術，包括湖人的三角進攻、勇士的無球掩護、火箭的空間拉開等，讓你學習頂級球隊的戰術思維。</p>
+                        <div class="feature-image">
+                            <img src="images/nba-tactics.jpg" alt="NBA 球隊戰術" class="tactic-img">
+                        </div>
+                    </div>
+                    <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="feature-icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <h3>互動式學習</h3>
+                        <p>通過我們的互動式平台，你可以自己設計戰術，模擬比賽情境，並獲得即時反饋，讓學習過程更加生動有趣。</p>
+                        <div class="feature-image">
+                            <img src="images/interactive-learning.jpg" alt="互動式學習" class="tactic-img">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta" id="cta">
+            <div class="container">
+                <h2 data-aos="fade-up">準備好提升你的籃球 IQ 了嗎？</h2>
+                <p data-aos="fade-up" data-aos-delay="100">加入 TactiBall，開始你的籃球戰術學習之旅，成為場上的決策者。</p>
+                <a href="#" class="btn btn-primary" data-aos="fade-up" data-aos-delay="200">立即註冊</a>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="testimonials" id="testimonials">
+            <div class="container">
+                <h2 data-aos="fade-up">用戶評價</h2>
+                <div class="testimonial-slider" data-aos="fade-up" data-aos-delay="100">
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <p>"TactiBall 徹底改變了我對籃球戰術的理解。作為一名高中籃球教練，我現在能夠更有效地向我的球員傳授戰術概念。"</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-image">
+                                <img src="images/testimonial-1.jpg" alt="陳教練">
+                            </div>
+                            <div class="author-info">
+                                <h4>陳教練</h4>
+                                <p>高中籃球教練</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <p>"作為一名業餘籃球愛好者，TactiBall 幫助我理解了比賽中的許多細節。現在我不僅僅是在打球，而是在場上思考和決策。"</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-image">
+                                <img src="images/testimonial-2.jpg" alt="李小明">
+                            </div>
+                            <div class="author-info">
+                                <h4>李小明</h4>
+                                <p>籃球愛好者</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <p>"互動式學習功能太棒了！我可以設計自己的戰術並看到它們如何運作。這是我見過的最好的籃球戰術學習平台。"</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-image">
+                                <img src="images/testimonial-3.jpg" alt="王大華">
+                            </div>
+                            <div class="author-info">
+                                <h4>王大華</h4>
+                                <p>大學籃球隊隊長</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-nav">
+                        <button class="prev-btn"><i class="fas fa-chevron-left"></i></button>
+                        <div class="dots">
+                            <div class="dot active"></div>
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                        </div>
+                        <button class="next-btn"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>關於 TactiBall</h3>
+                    <p>TactiBall 是一個專注於籃球戰術學習的平台，我們的使命是幫助籃球愛好者和教練提升他們的戰術理解和比賽智慧。</p>
+                </div>
+                <div class="footer-section">
+                    <h3>快速連結</h3>
+                    <ul>
+                        <li><a href="#features">特色</a></li>
+                        <li><a href="#testimonials">用戶評價</a></li>
+                        <li><a href="#cta">立即體驗</a></li>
+                        <li><a href="#">隱私政策</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>聯絡我們</h3>
+                    <p>有任何問題或建議？請隨時與我們聯繫。</p>
+                    <p>Email: info@tactiball.com</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 TactiBall. 版權所有。</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="js/script.js"></script>
+</body>
+</html> 
