@@ -27,14 +27,19 @@
         }
         .dot {
             position: absolute;
-            width: 12px;
-            height: 12px;
+            width: 20px;
+            height: 20px;
             background-color: red;
             border-radius: 50%;
-            top: 0%;
-            left: 0%;
+            top: 50%;
+            left: 50%;
             transform: translate(-50%, -50%);
-            transition: left 0.1s linear, top 0.1s linear;
+            cursor: grab;
+            box-shadow: 0 0 5px rgba(0,0,0,0.5);
+            z-index: 10;
+        }
+        .dot:active {
+            cursor: grabbing;
         }
         .controls {
             margin-top: 20px;
@@ -80,43 +85,95 @@
     
     <div class="position-display">
         <div>
-            目前位置： X：<span id="xPosition" class="position-value">0</span>, 
-            Y：<span id="yPosition" class="position-value">0</span>
-        </div>
-    </div>
-    
-    <div class="controls">
-        <div class="control-group">
-            <label for="manualX">X 座標 (0-100)</label>
-            <input type="number" id="manualX" value="0" min="0" max="100" step="1">
-        </div>
-        
-        <div class="control-group">
-            <label for="manualY">Y 座標 (0-100)</label>
-            <input type="number" id="manualY" value="0" min="0" max="100" step="1">
+            目前位置： X：<span id="xPosition" class="position-value">50</span>, 
+            Y：<span id="yPosition" class="position-value">50</span>
         </div>
     </div>
 
     <script>
         // 獲取紅點和控制元素
         const redDot = document.getElementById('redDot');
+        const courtContainer = document.querySelector('.court-container');
         const courtImage = document.querySelector('.court-image');
         const xPosition = document.getElementById('xPosition');
         const yPosition = document.getElementById('yPosition');
         const manualX = document.getElementById('manualX');
         const manualY = document.getElementById('manualY');
         
+        // 紅點拖動變數
+        let isDragging = false;
+        
         // 更新位置顯示
         function updatePositionDisplay(x, y) {
             xPosition.textContent = Math.round(x * 10) / 10;
             yPosition.textContent = Math.round(y * 10) / 10;
+            manualX.value = Math.round(x * 10) / 10;
+            manualY.value = Math.round(y * 10) / 10;
         }
         
         // 設置紅點位置
         function setDotPosition(x, y) {
+            // 限制範圍在0-100之間
+            x = Math.max(0, Math.min(100, x));
+            y = Math.max(0, Math.min(100, y));
+            
             redDot.style.left = x + '%';
             redDot.style.top = y + '%';
             updatePositionDisplay(x, y);
+        }
+        
+        // 從事件獲取相對座標
+        function getRelativeCoordinates(event) {
+            const rect = courtContainer.getBoundingClientRect();
+            let clientX, clientY;
+            
+            // 處理觸控事件
+            if (event.touches && event.touches.length) {
+                clientX = event.touches[0].clientX;
+                clientY = event.touches[0].clientY;
+            } else {
+                clientX = event.clientX;
+                clientY = event.clientY;
+            }
+            
+            // 計算相對位置（百分比）
+            const x = ((clientX - rect.left) / rect.width) * 100;
+            const y = ((clientY - rect.top) / rect.height) * 100;
+            
+            return { x, y };
+        }
+        
+        // 鼠標按下事件 - 開始拖動
+        redDot.addEventListener('mousedown', (e) => {
+            e.preventDefault();
+            isDragging = true;
+            document.addEventListener('mousemove', handleDrag);
+            document.addEventListener('mouseup', stopDrag);
+        });
+        
+        // 處理觸控設備
+        redDot.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            isDragging = true;
+            document.addEventListener('touchmove', handleDrag);
+            document.addEventListener('touchend', stopDrag);
+        });
+        
+        // 處理拖動
+        function handleDrag(e) {
+            if (!isDragging) return;
+            e.preventDefault();
+            const { x, y } = getRelativeCoordinates(e);
+            setDotPosition(x, y);
+        }
+        
+        // 停止拖動
+        function stopDrag() {
+            isDragging = false;
+            document.removeEventListener('mousemove', handleDrag);
+            document.removeEventListener('mouseup', stopDrag);
+            document.removeEventListener('touchmove', handleDrag);
+            document.removeEventListener('touchend', stopDrag);
         }
         
         // 監聽輸入框變化
@@ -132,8 +189,23 @@
             setDotPosition(x, y);
         });
         
-        // 初始化位置
-        setDotPosition(0, 0);
+        // 點擊球場任何位置也移動紅點
+        courtContainer.addEventListener('click', (e) => {
+            // 如果點擊的是紅點本身，不做任何事情
+            if (e.target === redDot) return;
+            
+            const { x, y } = getRelativeCoordinates(e);
+            setDotPosition(x, y);
+        });
+        
+        // 確保圖片加載完後初始化紅點位置
+        window.addEventListener('load', () => {
+            // 初始化位置在中央
+            setDotPosition(50, 50);
+        });
+        
+        // 立即設置初始位置
+        setDotPosition(50, 50);
     </script>
 </body>
 </html> 
